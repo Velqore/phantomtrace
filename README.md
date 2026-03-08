@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-GPL--3.0-red.svg)
 ![Python](https://img.shields.io/badge/python-3.8+-green.svg)
-![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)
 ![Copyright](https://img.shields.io/badge/copyright-2026%20Ayush-blue.svg)
 
 **Copyright (C) 2026 Ayush (Original Creator)**
@@ -79,6 +79,108 @@ Add cryptographically strong randomness to forensic artifacts and slack space fo
 - **Secure Multi-Party Computation**: Enable collaborative encrypted calculations
 - **Statistics on Encrypted Data**: Compute sums, averages on ciphertexts
 
+### Phantom Modules (v0.3.0+) - NEW! 🔥
+
+**11. Metadata Phantom**
+- Strip EXIF data from images (JPG, PNG, TIFF, etc.)
+- Remove PDF metadata (author, creator, timestamps)
+- Clean Office document metadata (DOCX, XLSX, PPTX)
+- Strip media file metadata (MP3, MP4, etc.)
+- Manipulate NTFS timestamps with nanosecond precision
+- Inject fake metadata for misdirection
+- Batch process entire directories
+
+**12. Process Phantom**
+- In-memory code execution without disk artifacts
+- Process name spoofing (Linux)
+- Parent PID spoofing (Windows)
+- Detect hidden processes
+- Anti-debugging checks (IsDebuggerPresent, TracerPid)
+- Detect analysis tools (IDA, x64dbg, Wireshark, etc.)
+- Process hollowing techniques
+- Shellcode injection capabilities
+
+**13. Credential Phantom**
+- Clear browser saved passwords (Chrome, Firefox, Edge, Brave)
+- Wipe Windows Credential Manager
+- Clear SSH keys and known_hosts
+- Remove browser cookies and autofill data
+- Clear SAM backup files (Windows)
+- Dump Linux passwords from memory (mimipenguin-style)
+- Extract browser cookies for analysis
+- Comprehensive credential wiping
+
+**14. Event Phantom**
+- Clear Windows event logs (Application, Security, System)
+- Clear PowerShell command history
+- Clear Bash history (Linux)
+- Remove RDP connection logs
+- Clear Sysmon logs
+- Disable event logging temporarily
+- Clear specific event IDs
+- Configure log size limits
+
+**15. AV Phantom**
+- Detect running AV/EDR products (Defender, CrowdStrike, Carbon Black, etc.)
+- Sandbox environment detection
+- Virtual machine detection
+- Debugger detection
+- Sleep acceleration detection
+- Check for analysis tools
+- Process masquerading techniques
+- Polymorphic signature generation
+
+**16. USB Phantom**
+- Real-time USB device monitoring
+- USB kill switch (tripwire)
+- Emergency system shutdown on USB change
+- Device whitelisting
+- BusKill-style protection
+- RAM wipe on disconnect
+- USB activity logging
+- Callback system for custom actions
+
+**17. Disk Phantom**
+- Multi-pass secure file deletion (Gutmann, DoD standards)
+- LUKS header destruction (Linux)
+- Emergency LUKS nuke for multiple devices
+- Free space wiping
+- Slack space wiping
+- MBR/GPT destruction
+- Fill disk with random data
+- Shred integration (Linux)
+
+**18. Registry Phantom** (Windows)
+- Clear recent documents registry
+- Remove Run/Search MRU lists
+- Clear UserAssist (program execution tracking)
+- Remove typed URLs/paths
+- Clear shellbags (folder view history)
+- Delete Jump Lists
+- Clear Windows Timeline/Activity History
+- Disable prefetch tracking
+- Comprehensive registry anti-forensics
+
+**19. Browser Phantom**
+- Clear browsing history (all major browsers)
+- Delete cookies from all browsers
+- Remove cache data
+- Clear download history
+- Remove local storage
+- Delete IndexedDB
+- Support for Chrome, Firefox, Edge, Brave
+- Cross-platform compatibility
+
+**20. Panic Button** 🚨
+- **Level 1**: Quick cleanup (browser, logs, credentials)
+- **Level 2**: Aggressive cleanup (Level 1 + registry, event logs)
+- **Level 3**: Nuclear option (Level 2 + secure deletion, RAM wipe, shutdown)
+- USB-triggered emergency cleanup
+- Keyboard hotkey activation (Ctrl+Shift+Alt+P)
+- Network-based panic broadcast support
+- Standalone panic script generation
+- Customizable destruction sequences
+
 ## 📦 Installation
 
 ### Automated Installation (Recommended)
@@ -120,6 +222,8 @@ pip install -e ".[he,network,dev]"  # homomorphic encryption, networking, dev to
 
 ## 🎯 Quick Start
 
+### Core Modules
+
 ```python
 from phantomtrace import QuantumDecay, TemporalFog, ShadowClone
 from phantomtrace import AdvancedEncryption, HomomorphicEncryption
@@ -149,11 +253,97 @@ c_sum = he.add_encrypted(c1, c2)
 result = he.decrypt_additive(c_sum)  # Returns 15, never decrypts intermediate values
 ```
 
+### Phantom Modules (v0.3.0+)
+
+```python
+from phantomtrace import (
+    MetadataPhantom, ProcessPhantom, CredentialPhantom,
+    EventPhantom, AVPhantom, USBPhantom, DiskPhantom,
+    RegistryPhantom, BrowserPhantom, PanicButton
+)
+
+# Metadata manipulation
+mp = MetadataPhantom()
+mp.strip_all_metadata("photo.jpg")  # Remove EXIF
+mp.manipulate_timestamps("document.pdf", randomize=True)
+
+# Process operations
+pp = ProcessPhantom()
+checks = pp.anti_debug_checks()  # Detect debuggers
+pp.execute_in_memory("print('No disk artifacts!')")
+
+# Credential cleaning
+cp = CredentialPhantom()
+cp.clear_all_credentials()  # Wipe all credential caches
+cp.clear_browser_passwords("all")
+
+# Event log manipulation
+ep = EventPhantom()
+ep.clear_all_logs()  # Clear Windows event logs
+ep.clear_powershell_history()
+
+# AV/EDR evasion
+ap = AVPhantom()
+av_detected = ap.detect_av_products()
+is_vm = ap.detect_virtual_machine()
+is_sandbox = ap.detect_sandbox()
+
+# USB security
+up = USBPhantom()
+up.setup_kill_switch(action="shutdown")  # Kill switch on USB change
+
+# Secure disk operations
+dp = DiskPhantom()
+dp.secure_delete_file("secret.txt", passes=7)
+dp.wipe_free_space("C:\\")
+
+# Registry cleaning (Windows)
+rp = RegistryPhantom()
+rp.comprehensive_registry_clean()
+
+# Browser forensics cleaning
+bp = BrowserPhantom()
+bp.clear_all_browser_data("all")
+
+# Emergency panic button
+pb = PanicButton()
+pb.panic_level_1()  # Quick cleanup
+pb.panic_level_2()  # Aggressive cleanup
+pb.panic_level_3()  # Nuclear option (includes shutdown)
+pb.setup_usb_panic_trigger(level=2)  # USB-triggered
+```
+
+### CLI Commands
+
+```bash
+# Core modules
+phantomtrace quantum-delete sensitive.txt --passes 7
+phantomtrace temporal-fog document.pdf --randomize
+phantomtrace shadow-clone --type mixed --count 100
+phantomtrace encrypt-aes secret.txt -p mypassword
+
+# Phantom modules (NEW in v0.3.0)
+phantomtrace metadata-strip photo.jpg
+phantomtrace metadata-timestamps document.pdf --randomize
+phantomtrace process-list --hidden
+phantomtrace process-check
+phantomtrace clear-credentials --target all
+phantomtrace clear-logs --type all
+phantomtrace av-detect
+phantomtrace usb-monitor --interval 1.0
+phantomtrace usb-killswitch --action shutdown
+phantomtrace secure-delete secret_folder/ --passes 3
+phantomtrace registry-clean
+phantomtrace browser-clean --browser all --type all
+phantomtrace panic --level 2 --trigger manual
+```
+
 ## 🏗️ Architecture
 
 ```
 phantomtrace/
 ├── modules/
+│   # Core Modules
 │   ├── quantum_decay.py           # Multi-pass secure deletion
 │   ├── temporal_fog.py            # Timestamp manipulation  
 │   ├── shadow_clones.py           # Decoy file generation
@@ -163,12 +353,23 @@ phantomtrace/
 │   ├── network_ghost.py           # Traffic obfuscation
 │   ├── entropy_injection.py       # Forensic artifact randomization
 │   ├── advanced_encryption.py     # AES-GCM, ChaCha20, sealed boxes
-│   └── homomorphic_encryption.py  # FHE, secret sharing, MPC
-├── utils/                          # Helper utilities
-├── core/                           # Core anti-forensics engine
-├── cli.py                          # Command-line interface
-├── install.py                      # Automated installer
-└── __init__.py                     # Module exports
+│   ├── homomorphic_encryption.py  # FHE, secret sharing, MPC
+│   # Phantom Modules (v0.3.0+)
+│   ├── metadata_phantom.py        # Metadata stripping & manipulation
+│   ├── process_phantom.py         # Process hiding & injection
+│   ├── credential_phantom.py      # Credential extraction & clearing
+│   ├── event_phantom.py           # Event log manipulation
+│   ├── av_phantom.py              # AV/EDR/Sandbox detection
+│   ├── usb_phantom.py             # USB monitoring & kill switch
+│   ├── disk_phantom.py            # Disk wiping & LUKS destruction
+│   ├── registry_phantom.py        # Windows registry cleaning
+│   ├── browser_phantom.py         # Browser artifact cleaning
+│   └── panic_button.py            # Emergency data destruction
+├── utils/                         # Helper utilities
+├── core/                          # Core anti-forensics engine
+├── cli.py                         # Command-line interface
+├── install.py                     # Automated installer
+└── __init__.py                    # Module exports
 ```
 
 ## 🛠️ Key Highlights
@@ -181,6 +382,30 @@ phantomtrace/
 - **Advanced Privacy**: Homomorphic encryption for private computation
 - **Easy Installation**: Automatic environment setup with `install.py`
 - **Active Development**: Regular updates with new research
+
+### Version 0.3.0 Release - COMPREHENSIVE FEATURE EXPANSION 🚀
+
+✨ **MASSIVE UPDATE - 10 New Phantom Modules:**
+- **Metadata Phantom**: EXIF/metadata stripping and manipulation
+- **Process Phantom**: Process hiding, injection, anti-debugging
+- **Credential Phantom**: Comprehensive credential wiping
+- **Event Phantom**: Event log and history manipulation
+- **AV Phantom**: AV/EDR/sandbox/VM detection
+- **USB Phantom**: USB monitoring and kill switch (BusKill-style)
+- **Disk Phantom**: Secure wiping, LUKS destruction
+- **Registry Phantom**: Windows registry anti-forensics
+- **Browser Phantom**: Multi-browser forensics cleaning
+- **Panic Button**: Emergency multi-level data destruction system
+
+🎯 **Feature Highlights:**
+- 150+ original anti-forensic techniques implemented by Ayush
+- USB kill switch with tripwire support
+- Three-level panic button (quick, aggressive, nuclear)
+- Comprehensive metadata manipulation
+- Process memory operations
+- Complete browser artifact cleaning
+- Windows registry anti-forensics
+- Cross-platform support (Windows/Linux)
 
 ### Version 0.2.0 Release
 
@@ -203,9 +428,13 @@ phantomtrace/
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+## Acknowledgments
+
+PhantomTrace is completely original work by Ayush, created from the ground up with novel anti-forensics methodologies and implementations.
+
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+GNU General Public License v3.0 (GPL-3.0) - see [LICENSE](LICENSE) file for details.
 
 ## 🔬 Research
 

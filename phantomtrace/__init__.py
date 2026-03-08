@@ -15,7 +15,7 @@
 PhantomTrace - Advanced Anti-Forensics Toolkit
 """
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __author__ = "Ayush (Original Creator)"
 __license__ = "GPL-3.0"
 
@@ -34,7 +34,20 @@ from .modules.network_ghost import NetworkGhost
 from .modules.advanced_encryption import AdvancedEncryption
 from .modules.homomorphic_encryption import HomomorphicEncryption
 
+# Import new phantom modules (v0.3.0+)
+from .modules.metadata_phantom import MetadataPhantom
+from .modules.process_phantom import ProcessPhantom
+from .modules.credential_phantom import CredentialPhantom
+from .modules.event_phantom import EventPhantom
+from .modules.av_phantom import AVPhantom
+from .modules.usb_phantom import USBPhantom
+from .modules.disk_phantom import DiskPhantom
+from .modules.registry_phantom import RegistryPhantom
+from .modules.browser_phantom import BrowserPhantom
+from .modules.panic_button import PanicButton
+
 __all__ = [
+    # Core modules
     'QuantumDecay',
     'TemporalFog',
     'ShadowClone',
@@ -45,4 +58,15 @@ __all__ = [
     'NetworkGhost',
     'AdvancedEncryption',
     'HomomorphicEncryption',
+    # Phantom modules
+    'MetadataPhantom',
+    'ProcessPhantom',
+    'CredentialPhantom',
+    'EventPhantom',
+    'AVPhantom',
+    'USBPhantom',
+    'DiskPhantom',
+    'RegistryPhantom',
+    'BrowserPhantom',
+    'PanicButton',
 ]

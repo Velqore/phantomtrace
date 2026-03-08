@@ -228,6 +228,17 @@ We welcome contributions! See `CONTRIBUTING.md` for:
 
 ---
 
+## 🙏 Credits
+
+This project acknowledges the public resource list maintained in:
+
+- `https://github.com/shadawck/awesome-anti-forensic`
+- Maintained by Remi Huguet (`@shadawck`)
+
+That repository is a useful community index of tools and references that helped guide research direction.
+
+---
+
 ## ⚖️ Legal & Ethical Use
 
 **Intended For:**

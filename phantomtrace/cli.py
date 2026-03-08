@@ -7,7 +7,42 @@ Command-line interface for PhantomTrace
 
 import argparse
 import sys
+import io
 from pathlib import Path
+
+# Fix Unicode output on Windows
+if sys.platform.startswith('win'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
+
+def print_banner():
+    """Print PhantomTrace banner."""
+    banner = """
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                                                           ║
+    ║              ██████╗ ██╗  ██╗ █████╗ ███╗   ██╗         ║
+    ║              ██╔══██╗██║  ██║██╔══██╗████╗  ██║         ║
+    ║              ██████╔╝███████║███████║██╔██╗ ██║         ║
+    ║              ██╔═══╝ ██╔══██║██╔══██║██║╚██╗██║         ║
+    ║              ██║     ██║  ██║██║  ██║██║ ╚████║         ║
+    ║              ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝         ║
+    ║                                                           ║
+    ║          ████████╗██████╗  █████╗  ██████╗███████╗      ║
+    ║          ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝      ║
+    ║             ██║   ██████╔╝███████║██║     █████╗        ║
+    ║             ██║   ██╔══██╗██╔══██║██║     ██╔══╝        ║
+    ║             ██║   ██║  ██║██║  ██║╚██████╗███████╗      ║
+    ║             ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝      ║
+    ║                                                           ║
+    ║              Advanced Anti-Forensics Toolkit             ║
+    ║                      Version 0.3.0                       ║
+    ║                                                           ║
+    ╚═══════════════════════════════════════════════════════════╝
+    """
+    print(banner)
+    print("    🔒 Open Source • 🆓 No Investment • 🚀 Novel Concepts\n")
+
 
 from phantomtrace import (
     QuantumDecay,
@@ -18,11 +53,23 @@ from phantomtrace import (
     LogSmoke,
     EntropyInjector,
     AdvancedEncryption,
-    HomomorphicEncryption
+    HomomorphicEncryption,
+    # New phantom modules
+    MetadataPhantom,
+    ProcessPhantom,
+    CredentialPhantom,
+    EventPhantom,
+    AVPhantom,
+    USBPhantom,
+    DiskPhantom,
+    RegistryPhantom,
+    BrowserPhantom,
+    PanicButton
 )
 
 
 def main():
+    print_banner()
     parser = argparse.ArgumentParser(
         description='PhantomTrace - Anti-Forensics Toolkit',
         epilog='Educational use only!'
@@ -84,6 +131,58 @@ def main():
     he_parser.add_argument('--shares', type=int, default=5, help='Total shares to create')
     he_parser.add_argument('--threshold', type=int, default=3, help='Shares needed to recover')
     
+    # NEW PHANTOM MODULES (v0.3.0+)
+    
+    # Metadata Phantom commands
+    meta_parser = subparsers.add_parser('metadata-strip', help='Strip all metadata from file')
+    meta_parser.add_argument('file', help='File to clean')
+    
+    meta_ts_parser = subparsers.add_parser('metadata-timestamps', help='Manipulate file timestamps')
+    meta_ts_parser.add_argument('file', help='File to modify')
+    meta_ts_parser.add_argument('--randomize', action='store_true', help='Random timestamps')
+    
+    # Process Phantom commands
+    proc_list_parser = subparsers.add_parser('process-list', help='List all processes')
+    proc_list_parser.add_argument('--hidden', action='store_true', help='Detect hidden processes')
+    
+    proc_check_parser = subparsers.add_parser('process-check', help='Anti-debug/AV checks')
+    
+    # Credential Phantom commands
+    cred_clear_parser = subparsers.add_parser('clear-credentials', help='Clear credential caches')
+    cred_clear_parser.add_argument('--target', choices=['browser', 'ssh', 'windows', 'all'], default='all')
+    
+    # Event Phantom commands
+    event_clear_parser = subparsers.add_parser('clear-logs', help='Clear event/system logs')
+    event_clear_parser.add_argument('--type', choices=['event', 'powershell', 'bash', 'all'], default='all')
+    
+    # AV Phantom commands
+    av_detect_parser = subparsers.add_parser('av-detect', help='Detect AV/EDR/Sandbox/VM')
+    
+    # USB Phantom commands
+    usb_monitor_parser = subparsers.add_parser('usb-monitor', help='Monitor USB devices')
+    usb_monitor_parser.add_argument('--interval', type=float, default=1.0, help='Check interval')
+    
+    usb_kill_parser = subparsers.add_parser('usb-killswitch', help='Arm USB kill switch')
+    usb_kill_parser.add_argument('--action', choices=['shutdown', 'lock', 'wipe'], default='shutdown')
+    
+    # Disk Phantom commands
+    disk_wipe_parser = subparsers.add_parser('secure-delete', help='Securely delete file/directory')
+    disk_wipe_parser.add_argument('path', help='Path to delete')
+    disk_wipe_parser.add_argument('--passes', type=int, default=3, help='Wipe passes')
+    
+    # Registry Phantom commands
+    reg_clean_parser = subparsers.add_parser('registry-clean', help='Clean Windows registry artifacts')
+    
+    # Browser Phantom commands
+    browser_clean_parser = subparsers.add_parser('browser-clean', help='Clean browser artifacts')
+    browser_clean_parser.add_argument('--browser', choices=['chrome', 'firefox', 'edge', 'brave', 'all'], default='all')
+    browser_clean_parser.add_argument('--type', choices=['history', 'cookies', 'cache', 'all'], default='all')
+    
+    # Panic Button commands
+    panic_parser = subparsers.add_parser('panic', help='Emergency cleanup')
+    panic_parser.add_argument('--level', type=int, choices=[1, 2, 3], default=2, help='Cleanup level (1=quick, 2=aggressive, 3=nuclear)')
+    panic_parser.add_argument('--trigger', choices=['manual', 'usb', 'hotkey'], default='manual')
+    
     args = parser.parse_args()
     
     if not args.command:
@@ -91,6 +190,7 @@ def main():
         return 1
     
     try:
+        # Original commands
         if args.command == 'quantum-delete':
             qd = QuantumDecay()
             if qd.quantum_delete(args.file, passes=args.passes):
@@ -219,9 +319,137 @@ def main():
                 print(f"  Share {i}: {share}")
             
             return 0
+        
+        # NEW PHANTOM MODULE COMMANDS
+        
+        elif args.command == 'metadata-strip':
+            mp = MetadataPhantom()
+            if mp.strip_all_metadata(args.file):
+                print(f"✓ Metadata stripped from {args.file}")
+                return 0
+            return 1
+        
+        elif args.command == 'metadata-timestamps':
+            mp = MetadataPhantom()
+            if mp.manipulate_timestamps(args.file, randomize=args.randomize):
+                print(f"✓ Timestamps manipulated for {args.file}")
+                return 0
+            return 1
+        
+        elif args.command == 'process-list':
+            pp = ProcessPhantom()
+            processes = pp.list_all_processes(include_hidden=args.hidden)
+            print(f"✓ Found {len(processes)} processes")
+            for proc in processes[:20]:  # Show first 20
+                print(f"  PID {proc['pid']}: {proc['name']}")
+            return 0
+        
+        elif args.command == 'process-check':
+            pp = ProcessPhantom()
+            checks = pp.anti_debug_checks()
+            print("✓ Anti-debug checks:")
+            for check, result in checks.items():
+                print(f"  {check}: {result}")
+            return 0
+        
+        elif args.command == 'clear-credentials':
+            cp = CredentialPhantom()
+            if args.target == 'all':
+                results = cp.clear_all_credentials()
+                print(f"✓ Cleared credentials: {results}")
+            elif args.target == 'browser':
+                cp.clear_browser_passwords("all")
+            elif args.target == 'ssh':
+                cp.clear_ssh_artifacts()
+            elif args.target == 'windows':
+                cp.clear_windows_credential_manager()
+            return 0
+        
+        elif args.command == 'clear-logs':
+            ep = EventPhantom()
+            if args.type == 'all':
+                results = ep.anti_forensic_cleanup()
+                print(f"✓ Cleared logs: {results}")
+            elif args.type == 'event':
+                ep.clear_all_logs()
+            elif args.type == 'powershell':
+                ep.clear_powershell_history()
+            elif args.type == 'bash':
+                ep.clear_bash_history()
+            return 0
+        
+        elif args.command == 'av-detect':
+            ap = AVPhantom()
+            results = ap.comprehensive_evasion_check()
+            print("✓ Evasion check complete")
+            return 0
+        
+        elif args.command == 'usb-monitor':
+            up = USBPhantom()
+            print("Starting USB monitoring...")
+            up.start_monitoring(interval=args.interval)
+            return 0
+        
+        elif args.command == 'usb-killswitch':
+            up = USBPhantom()
+            print(f"Arming USB kill switch (action: {args.action})...")
+            thread = up.setup_kill_switch(action=args.action)
+            if thread:
+                thread.join()  # Wait for monitoring
+            return 0
+        
+        elif args.command == 'secure-delete':
+            dp = DiskPhantom()
+            import os
+            from pathlib import Path
+            if os.path.isdir(args.path):
+                count = dp.secure_delete_directory(args.path, passes=args.passes)
+                print(f"✓ Securely deleted {count} files from directory")
+            else:
+                if dp.secure_delete_file(args.path, passes=args.passes):
+                    print(f"✓ Securely deleted {args.path}")
+                    return 0
+                return 1
+            return 0
+        
+        elif args.command == 'registry-clean':
+            rp = RegistryPhantom()
+            results = rp.comprehensive_registry_clean()
+            print(f"✓ Registry cleaned: {results}")
+            return 0
+        
+        elif args.command == 'browser-clean':
+            bp = BrowserPhantom()
+            if args.type == 'all':
+                results = bp.clear_all_browser_data(args.browser)
+                print(f"✓ Browser data cleared: {results}")
+            elif args.type == 'history':
+                bp.clear_browser_history(args.browser)
+            elif args.type == 'cookies':
+                bp.clear_browser_cookies(args.browser)
+            elif args.type == 'cache':
+                bp.clear_browser_cache(args.browser)
+            return 0
+        
+        elif args.command == 'panic':
+            pb = PanicButton()
+            if args.trigger == 'manual':
+                if args.level == 1:
+                    pb.panic_level_1()
+                elif args.level == 2:
+                    pb.panic_level_2()
+                elif args.level == 3:
+                    pb.panic_level_3()
+            elif args.trigger == 'usb':
+                pb.setup_usb_panic_trigger(level=args.level)
+            elif args.trigger == 'hotkey':
+                pb.hotkey_panic(level=args.level)
+            return 0
     
     except Exception as e:
         print(f"Error: {e}")
+        import traceback
+        traceback.print_exc()
         return 1
     
     return 0
