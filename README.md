@@ -5,6 +5,9 @@
 ![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)
 ![Copyright](https://img.shields.io/badge/copyright-2026%20Ayush-blue.svg)
 
+<a href="https://www.buymeacoffee.com/ayushtyagiv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+
 **Copyright (C) 2026 Ayush@Velqore (Original Creator)**
 
 An open-source, modular anti-forensics toolkit featuring innovative techniques for privacy protection, security research, and penetration testing. Now with **homomorphic encryption** and **advanced authenticated encryption**.
