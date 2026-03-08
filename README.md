@@ -5,7 +5,7 @@
 ![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)
 ![Copyright](https://img.shields.io/badge/copyright-2026%20Ayush-blue.svg)
 
-**Copyright (C) 2026 Ayush (Original Creator)**
+**Copyright (C) 2026 Ayush@Velqore (Original Creator)**
 
 An open-source, modular anti-forensics toolkit featuring innovative techniques for privacy protection, security research, and penetration testing. Now with **homomorphic encryption** and **advanced authenticated encryption**.
 
@@ -13,13 +13,13 @@ An open-source, modular anti-forensics toolkit featuring innovative techniques f
 
 **This project is protected under GPL-3.0 License.**
 
-- **Original Author**: Ayush
+- **Original Author**: Ayush|@Velqore
 - **Year**: 2026
 - **License**: GNU General Public License v3.0
 
 **IMPORTANT**: This software is licensed under GPL-3.0, which means:
 - ✅ You CAN use, study, and modify this software
-- ✅ You MUST provide attribution to the original author (Ayush)
+- ✅ You MUST provide attribution to the original author (Ayush|@Velqore)
 - ✅ Any derivative works MUST be released under GPL-3.0
 - ❌ You CANNOT make this software proprietary/closed-source
 - ❌ You CANNOT remove copyright notices or attribution
@@ -187,7 +187,7 @@ Add cryptographically strong randomness to forensic artifacts and slack space fo
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/phantomtrace.git
+git clone https://github.com/Velqore/phantomtrace.git
 cd phantomtrace
 
 # Run automatic installer (handles venv, dependencies, verification)
@@ -205,7 +205,7 @@ The installer will:
 ```bash
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate.ps1
 
 # Install from source
 pip install -e .
